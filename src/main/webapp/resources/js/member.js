@@ -24,44 +24,37 @@ $(function(){
 			return false;
 		}
 		
-		return false;
 	})
 	
-	$("#joinIdCheck").on('click',function(){
-		var checkId = $('#id')
+	$('#memberLogin').on('click',function(){
 		
-		if(checkId.val() != ''){
-			
-			$.ajax({
-				
-				url : '/member/joinIdCheck',
-				type : 'post',
-				data : {
-					'id' : checkId.val()
-				},
-				contentType: false,
-				processData: false,
-				success : function(result){
+		var id = $('#login_id')
+		var pw = $('#login_pw')
+		
+		$.ajax({
+			url : '/member/login',
+			method : 'post',
+			data : {
+				'id' : id.val(),
+				'pw' : pw.val()
+			},
+			dataType : 'json',
+			success : function(result){
+				if(result){
+					alert('성공!')
+					location.reload()
 					
-					alert(result)
-					if(result == 0){
-						alert('중복되는 아이디 있음')
-					}else if(result == 1){
-						alert('사용가능한 아이디!')
-					}else{
-						alert('알수없는 오류입니다')
-						setTimeout(function(){
-							location.reload()
-						},200)
-					}
-				},
-				error : function(){
-					alert('error')
+				}else{
+					alert('회원정보 틀림')
 				}
-			})			
-		}else{
-			alert('확인할 ID 입력요망')
-		}
-
+			},
+			error : function(){
+				alert('error')
+			}
+			
+			
+		})
 	})
+	
+	
 })

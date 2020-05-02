@@ -15,9 +15,6 @@
 	  	<li>
 	  		<p>${sessionScope.userName}님 환영합니다!</p>
 	  	</li>
-	  	<li>
-            <a href="/member/myPage" data-toggle="modal" data-target="#myPageModal">My Page</a>
-	    </li>
 	    <li>
             <a href="/member/logout">Logout</a>
 	    </li>

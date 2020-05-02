@@ -23,9 +23,6 @@
 	    </li>
 		</c:when>
 	  	<c:otherwise>
-	  	<li class="nav-item">
-            <a class="nav-link js-scroll-trigger myPageBtn" href="/member/myPage" data-toggle="modal" data-target="#myPageModal">My Page</a>
-	    </li>
 	    <li class="nav-item">
             <a class="nav-link js-scroll-trigger logoutBtn" href="/member/logout">Logout</a>
 	    </li>

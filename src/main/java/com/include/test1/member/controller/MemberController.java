@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.include.test1.member.dao.MemberDAO;
@@ -35,30 +36,9 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/joinIdCheck",method=RequestMethod.POST)
-	@ResponseBody
-	public int joinIdCheck(String id) {
-		System.out.println("id : " + id);
-		
-		int check = 2;
-		if(id != null) {
-			Member isMember = dao.getMemberById(id);
-		
-			if(isMember != null) {
-				//중복되는 ID 있음
-				check = 0;
-			}else {
-				//사용가능 ID
-				check = 1;
-			}
-		}
-		
-		return check;
-	}
-	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
-	public int login(Member member,HttpSession session) {
+	public boolean login(Member member,HttpSession session) {
 		System.out.println("member : " + member);
 		if(member.getId() != null) {
 			String id = member.getId();
@@ -70,14 +50,14 @@ public class MemberController {
 					session.setAttribute("userId", isMember.getId());
 					session.setAttribute("userName", isMember.getName());
 					
-					return 1;
+					return true;
 				}else {
-					return 0;
+					return false;
 				}
 			}
 		}
 		
-		return 2;
+		return false;
 	}
 	
 	
@@ -88,5 +68,19 @@ public class MemberController {
 		session.removeAttribute("userId");
 		session.removeAttribute("userName");
 		return "redirect:/";
+	}
+	
+	
+	@RequestMapping(value="/getMember",method=RequestMethod.GET)
+	public Member getMember(HttpSession session) {
+		Member member = null;
+		
+		String userId = (String) session.getAttribute("userId");
+		
+		member = dao.getMemberById(userId);
+		System.out.println(member);
+		member.setPw("");
+		
+		return member;
 	}
 }
