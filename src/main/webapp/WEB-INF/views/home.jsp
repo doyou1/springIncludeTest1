@@ -6,10 +6,12 @@
 	<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<jsp:include page="/WEB-INF/views/common/nav.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/modal.jsp"></jsp:include>
+	<br>
+	<br>
+	<jsp:include page="/WEB-INF/views/common/loginForm.jsp"></jsp:include>	
+	<jsp:include page="/WEB-INF/views/common/memberList.jsp"></jsp:include>
 </body>
+
 </html>
